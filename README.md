@@ -1,34 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Lampung - Indonesia Dictionary
 
-## Getting Started
+Welcome to the Lampung Dictionary repository! This project is about providing a digital dictionary of the Lampung language. Explore the unique linguistic heritage of this region in just a few clicks.
 
-First, run the development server:
+### Technology used
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+- NextJS
+- Prisma
+- Typescript
+
+## Installation
+
+### Clone
+
+```
+$ git clone https://github.com/rimamei/Lampung-Dictionary.git
+$ cd Lampung-Dictionary
+$ npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Create Environment Variable
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+DATABASE_URL=YOUR_MONGO_URI
+NEXT_PUBLIC_API=YOUR_API
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Prisma
 
-## Learn More
+```
+$ npx prisma generate
+$ npx prisma db push
+$ npx studio prisma
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Start Development Server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+$ npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## API Endpoint
 
-## Deploy on Vercel
+The Unofficial Lampung - Indonesia API. Revived from [meizano/lampung](https://github.com/meizano/lampung)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## BASE URL
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+https://lampung-dictionary.vercel.app
+
+### Translation
+
+| No  | HTTP Method | URI                                           | Operation                                               |
+| --- | ----------- | --------------------------------------------- | ------------------------------------------------------- |
+| 1   | GET         | /api/translations?search={search}&type={type} | Get all data by search (string) or type ("id" or "lpg") |
+
+### Example
+
+1. https://lampung-dictionary.vercel.app/api/translations?search=search&type=id
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+Fork the Project
+
+1. Create your Feature Branch `git checkout -b [feature]`
+2. Commit your Changes `git commit -m 'Add some feature'`
+3. Push to the Branch `git push origin [feature]`
+4. Open a Pull Request
+
+---
+
+Copyright © 2023 [Rima Mei Handayani](https://github.com/rimamei/)
