@@ -1,6 +1,6 @@
 # Lampung - Indonesia Dictionary
 
-Welcome to the Lampung Dictionary repository! This project is about providing a digital dictionary of the Lampung language. Explore the unique linguistic heritage of this region in just a few clicks.
+Welcome to the Lampung Dictionary repository! This project is about providing a digital dictionary of the Lampung language interface and api. Explore the unique linguistic heritage of this region in just a few clicks.
 
 ### Technology used
 
@@ -22,7 +22,6 @@ $ npm install
 
 ```
 DATABASE_URL=YOUR_MONGO_URI
-NEXT_PUBLIC_API=YOUR_API
 ```
 
 ### Prisma
@@ -32,6 +31,8 @@ $ npx prisma generate
 $ npx prisma db push
 $ npx studio prisma
 ```
+
+Add translation data by adding indonesia2lampung.json on seed folder to your database
 
 ### Start Development Server
 
