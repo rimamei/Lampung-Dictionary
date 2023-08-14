@@ -59,12 +59,12 @@ const Content = ({ data }: ContentProps) => {
   let tl = "";
   const notFoundMessage = "Kata tidak ditemukan";
 
-  if (data.message === "Data is not found") {
-    tl = notFoundMessage;
-  } else {
-    if (text && lang.tl === "id") {
+  if (text) {
+    if (data.message === "Data is not found") {
+      tl = notFoundMessage;
+    } else if (lang.tl === "id") {
       tl = data?.data[0]?.idkata ?? notFoundMessage;
-    } else if (text && lang.tl === "lpg") {
+    } else if (lang.tl === "lpg") {
       tl = data?.data[0]?.lpgkata ?? notFoundMessage;
     }
   }
