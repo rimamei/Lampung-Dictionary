@@ -22,7 +22,7 @@ const Search = ({
       </h1>
       <textarea
         placeholder={placeholder}
-        className="min-h-[202px] w-full min-w-[269px] rounded-xl border border-gray-100 p-6 shadow outline-none"
+        className="min-h-[150px] w-full min-w-[269px] rounded-xl border border-gray-100 p-6 shadow outline-none"
         disabled={disabled}
         value={value}
         {...rest}

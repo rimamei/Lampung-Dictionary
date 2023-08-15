@@ -1,11 +1,11 @@
 "use client";
 
-import { debounce } from "lodash";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { LiaExchangeAltSolid } from "react-icons/lia";
 
 import Search from "./Search";
+import Translate from "./Translate";
 
 type ContentProps = {
   data: TranslationResponseType;
@@ -34,18 +34,16 @@ const Content = ({ data }: ContentProps) => {
   }, [urlText, urlLang]);
 
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
-    handleSearchChange(e.target.value);
-  };
+    const { value } = e.target;
 
-  const handleSearchChange = debounce((val: string) => {
-    if (val) {
-      console.log(lang);
-      router.push(`/?lang=${lang.og}&text=${val}`);
+    setText(value);
+
+    if (value) {
+      router.push(`/?lang=${lang.og}&text=${value}`);
     } else {
       router.push(`/?lang=${lang.og}`);
     }
-  });
+  };
 
   const handleLangChange = () => {
     router.push(`/?lang=${lang.og === "id" ? "lpg" : "id"}`);
@@ -56,22 +54,9 @@ const Content = ({ data }: ContentProps) => {
     setText("");
   };
 
-  let tl = "";
-  const notFoundMessage = "Kata tidak ditemukan";
-
-  if (text) {
-    if (data.message === "Data is not found") {
-      tl = notFoundMessage;
-    } else if (lang.tl === "id") {
-      tl = data?.data[0]?.idkata ?? notFoundMessage;
-    } else if (lang.tl === "lpg") {
-      tl = data?.data[0]?.lpgkata ?? notFoundMessage;
-    }
-  }
-
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:items-start md:space-x-4 md:space-y-0">
-      <div className="md:w-1/2">
+      <div className="w-full md:w-1/2">
         <Search
           lang={lang.og}
           placeholder="Masukkan text..."
@@ -86,13 +71,8 @@ const Content = ({ data }: ContentProps) => {
           onClick={handleLangChange}
         />
       </div>
-      <div className="md:w-1/2">
-        <Search
-          lang={lang.tl}
-          placeholder="Terjemahan"
-          disabled={true}
-          value={tl}
-        />
+      <div className="w-full md:w-1/2">
+        <Translate lang={lang.tl} data={data} text={text} />
       </div>
     </div>
   );
