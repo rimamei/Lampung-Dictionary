@@ -1,6 +1,6 @@
 # Lampung - Indonesia Dictionary
 
-Welcome to the Lampung Dictionary repository! This project is about providing a digital dictionary of the Lampung language interface and api. Explore the unique linguistic heritage of this region in just a few clicks.
+Welcome to the Lampung Dictionary repository! This project is about providing a digital dictionary of the Lampung language interface and api.
 
 ### Technology used
 
@@ -13,8 +13,8 @@ Welcome to the Lampung Dictionary repository! This project is about providing a 
 ### Clone
 
 ```
-$ git clone https://github.com/rimamei/Lampung-Dictionary.git
-$ cd Lampung-Dictionary
+$ git clone https://github.com/rimamei/kamus-bahasa-lampung-indonesia.git
+$ cd kamus-bahasa-lampung-indonesia
 $ npm install
 ```
 
@@ -45,18 +45,19 @@ $ npm run dev
 The Unofficial Lampung - Indonesia API. Revived from [meizano/lampung](https://github.com/meizano/lampung)
 
 ## BASE URL
+If you want to integrate without making an api then you can use this endpoint.
 
-https://lampung-dictionary.vercel.app
+https://kamus-bahasa-lampung.vercel.app/
 
 ### Translation
 
 | No  | HTTP Method | URI                                           | Operation                                               |
 | --- | ----------- | --------------------------------------------- | ------------------------------------------------------- |
-| 1   | GET         | /api/translations?search={search}&type={type} | Get all data by search (string) or type ("id" or "lpg") |
+| 1   | GET         | /api/translations?text={text}&lang={lang}     | Get all data by text (string) and lang ("id" or "lpg") |
 
 ### Example
 
-1. https://lampung-dictionary.vercel.app/api/translations?search=search&type=id
+1. https://kamus-bahasa-lampung.vercel.app/api/translations?text=saya&lang=id
 
 ## Contributing
 
