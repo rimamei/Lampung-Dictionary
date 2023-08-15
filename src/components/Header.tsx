@@ -14,7 +14,7 @@ const Header = () => {
         </div>
         <div>
           <Link
-            href="https://github.com/rimamei"
+            href="https://github.com/rimamei/kamus-bahasa-lampung-indonesia"
             target="_blank"
             rel="noopener noreferrer"
             className="cursor-pointer"
