@@ -1,6 +1,7 @@
-import Content from "@/components/Content";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+
+import Translation from "@/features/Translation";
 
 const fetchSearchData = async ({ text, lang }: ParamsType) => {
   let q = "";
@@ -29,7 +30,7 @@ const TranslationPage = async ({ searchParams }: any) => {
     <div className="from-1% flex min-h-screen w-screen flex-col bg-white">
       <Header />
       <main className="mx-auto h-full w-full max-w-[1280px] flex-grow overflow-hidden bg-white px-6 pt-24">
-        <Content data={data} />
+        <Translation data={data} />
       </main>
       <Footer />
     </div>

@@ -3,17 +3,17 @@
 import React, { useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
-import { lampung } from "@/app/fonts";
+import { lampung_v2 } from "@/app/fonts";
 import { convertToLampungAlphabet } from "@/utils/convertToLampungAlphabet";
 import { cn } from "@/utils/style";
 
-type TranslateProps = {
+type TranslateOutputProps = {
   lang: string;
   text: string;
   data: TranslationResponseType;
 };
 
-const Translate = ({ lang, data, text }: TranslateProps) => {
+const TranslateOutput = ({ lang, data, text }: TranslateOutputProps) => {
   const [isExpand, setIsExpand] = useState(false);
 
   let lengthOtherTrans = data.data.length;
@@ -42,7 +42,7 @@ const Translate = ({ lang, data, text }: TranslateProps) => {
               )}
             </p>
             {lang === "lpg" && data?.data[0]?.lpgkata ? (
-              <p className={cn("text-4xl", lampung.className)}>
+              <p className={cn("text-4xl", lampung_v2.className)}>
                 {convertToLampungAlphabet(data?.data[0]?.lpgkata)}
               </p>
             ) : (
@@ -90,8 +90,10 @@ const Translate = ({ lang, data, text }: TranslateProps) => {
                       )}
                     </p>
                     {lang === "lpg" ? (
-                      <span className={cn("text-4xl", lampung.className)}>
-                        {convertToLampungAlphabet(item?.lpgkata ?? "")}
+                      <span className={cn("text-4xl", lampung_v2.className)}>
+                        {convertToLampungAlphabet(
+                          item?.lpgaksara ?? item?.lpgkata ?? "",
+                        )}
                       </span>
                     ) : null}
                   </li>
@@ -104,4 +106,4 @@ const Translate = ({ lang, data, text }: TranslateProps) => {
   );
 };
 
-export default Translate;
+export default TranslateOutput;

@@ -2,19 +2,19 @@
 
 import React from "react";
 
-type SearchProps = React.HTMLAttributes<HTMLTextAreaElement> & {
+type SearchInputProps = React.HTMLAttributes<HTMLTextAreaElement> & {
   lang: string;
   value: string;
   disabled?: boolean;
 };
 
-const Search = ({
+const SearchInput = ({
   lang,
   placeholder,
   disabled,
   value,
   ...rest
-}: SearchProps) => {
+}: SearchInputProps) => {
   return (
     <div>
       <h1 className="mb-2 w-full rounded-full border-primary bg-primary p-2 text-center text-white">
@@ -31,4 +31,4 @@ const Search = ({
   );
 };
 
-export default Search;
+export default SearchInput;

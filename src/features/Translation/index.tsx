@@ -4,14 +4,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { LiaExchangeAltSolid } from "react-icons/lia";
 
-import Search from "./Search";
-import Translate from "./Translate";
+import SearchInput from "./SearchInput";
+import TranslateOutput from "./TranslateOutput";
 
-type ContentProps = {
+type TranslationProps = {
   data: TranslationResponseType;
 };
 
-const Content = ({ data }: ContentProps) => {
+const Translation = ({ data }: TranslationProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const urlLang = searchParams.get("lang");
@@ -19,8 +19,8 @@ const Content = ({ data }: ContentProps) => {
 
   const [text, setText] = useState("");
   const [lang, setLang] = useState({
-    og: "lpg",
-    tl: "id",
+    og: "id",
+    tl: "lpg",
   });
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Content = ({ data }: ContentProps) => {
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:items-start md:space-x-4 md:space-y-0">
       <div className="w-full md:w-1/2">
-        <Search
+        <SearchInput
           lang={lang.og}
           placeholder="Masukkan text..."
           onChange={handleTextChange}
@@ -72,10 +72,10 @@ const Content = ({ data }: ContentProps) => {
         />
       </div>
       <div className="w-full md:w-1/2">
-        <Translate lang={lang.tl} data={data} text={text} />
+        <TranslateOutput lang={lang.tl} data={data} text={text} />
       </div>
     </div>
   );
 };
 
-export default Content;
+export default Translation;
