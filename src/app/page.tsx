@@ -27,9 +27,9 @@ const TranslationPage = async ({ searchParams }: any) => {
   const data = await fetchSearchData({ text, lang });
 
   return (
-    <div className="from-1% flex min-h-screen w-screen flex-col bg-white">
+    <div className="prose dark:prose-invert flex min-h-screen w-screen flex-col">
       <Header />
-      <main className="mx-auto h-full w-full max-w-[1280px] flex-grow overflow-hidden bg-white px-6 pt-24">
+      <main className="mx-auto h-full w-full max-w-[1280px] flex-grow overflow-hidden px-6 pt-24">
         <Translation data={data} />
       </main>
       <Footer />
