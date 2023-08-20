@@ -2,7 +2,13 @@
 
 import { debounce } from "lodash";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { LiaExchangeAltSolid } from "react-icons/lia";
 
@@ -20,6 +26,7 @@ const Translation = ({ data }: TranslationProps) => {
   const [isExpand, setIsExpand] = useState(false);
 
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const searchParams = useSearchParams();
   const urlLang = searchParams.get("lang");
@@ -47,14 +54,20 @@ const Translation = ({ data }: TranslationProps) => {
     lengthOtherTrans = 4;
   }
 
+  const navigate = (url: string) => {
+    startTransition(() => {
+      router.push(url);
+    });
+  };
+
   const handleTextChangeDebounce = useCallback(
     debounce((value: string) => {
       if (value) {
-        router.push(`/?lang=${lang.og}&text=${value}`);
+        navigate(`/?lang=${lang.og}&text=${value}`);
       } else {
-        router.push(`/?lang=${lang.og}`);
+        navigate(`/?lang=${lang.og}`);
       }
-    }, 300),
+    }, 700),
     [],
   );
 
@@ -75,6 +88,8 @@ const Translation = ({ data }: TranslationProps) => {
     setText("");
     setIsExpand(false);
   };
+
+  console.log("isPending", isPending);
 
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:items-start md:space-x-4 md:space-y-0">
@@ -106,7 +121,8 @@ const Translation = ({ data }: TranslationProps) => {
           {data.message !== "Data is not found" && text ? (
             <>
               <p>
-                {lang.tl === "id" ? data.data[0].idkata : data.data[0].lpgkata}{" "}
+                {lang.tl === "id" ? data.data[0].idkata : data.data[0].lpgkata}
+                {isPending && <span>...</span>}
                 {lang.tl === "lpg" && data.data[0]?.lpgdialek && (
                   <span className="font-bold">
                     (Dialek {data.data[0]?.lpgdialek ?? "-"})
@@ -122,9 +138,11 @@ const Translation = ({ data }: TranslationProps) => {
               )}
             </>
           ) : data.message === "Data is not found" && text ? (
-            <p>Kata tidak ditemukan</p>
+            <p>Kata tidak ditemukan{isPending && <span>...</span>}</p>
           ) : (
-            <p className="text-gray-400">Terjemahan</p>
+            <p className="text-gray-400">
+              Terjemahan{isPending && <span>...</span>}
+            </p>
           )}
         </div>
 
