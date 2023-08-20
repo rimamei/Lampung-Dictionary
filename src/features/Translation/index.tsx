@@ -1,7 +1,8 @@
 "use client";
 
+import { debounce } from "lodash";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { LiaExchangeAltSolid } from "react-icons/lia";
 
@@ -46,17 +47,23 @@ const Translation = ({ data }: TranslationProps) => {
     lengthOtherTrans = 4;
   }
 
+  const handleTextChangeDebounce = useCallback(
+    debounce((value: string) => {
+      if (value) {
+        router.push(`/?lang=${lang.og}&text=${value}`);
+      } else {
+        router.push(`/?lang=${lang.og}`);
+      }
+    }, 300),
+    [],
+  );
+
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
 
     setText(value);
     setIsExpand(false);
-
-    if (value) {
-      router.push(`/?lang=${lang.og}&text=${value}`);
-    } else {
-      router.push(`/?lang=${lang.og}`);
-    }
+    handleTextChangeDebounce(value);
   };
 
   const handleLangChange = () => {

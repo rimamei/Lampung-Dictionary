@@ -13,6 +13,7 @@ const fetchSearchData = async ({ text, lang }: ParamsType) => {
     `${process.env.NEXT_PUBLIC_API}/api/translations?text=${q}&lang=${
       lang ?? "id"
     }`,
+    { cache: "no-store" },
   );
 
   if (!res.ok) {
