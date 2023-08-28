@@ -89,8 +89,6 @@ const Translation = ({ data }: TranslationProps) => {
     setIsExpand(false);
   };
 
-  console.log("isPending", isPending);
-
   return (
     <div className="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:items-start md:space-x-4 md:space-y-0">
       <div className="w-full md:w-1/2">
