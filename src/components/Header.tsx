@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
@@ -21,7 +22,13 @@ const Header = () => {
     <header className="bg-blur sticky top-0 border-b border-gray-100 bg-white shadow dark:border-gray-900 dark:bg-zinc-700">
       <div className="mx-auto flex max-w-[1280px] items-center justify-between p-4">
         <div className="flex items-center">
-          <img src="/siger.svg" alt="siger" className="mr-4" />
+          <Image
+            width={70}
+            height={70}
+            src="/siger.svg"
+            alt="siger"
+            className="mr-4 object-cover"
+          />
           <h1 className="font-semibold">
             Kamus <br /> Bahasa Lampung
           </h1>
