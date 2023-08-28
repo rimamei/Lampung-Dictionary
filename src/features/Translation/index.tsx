@@ -116,11 +116,15 @@ const Translation = ({ data }: TranslationProps) => {
           {/* mapping translation data 
             Check text because there's no data cleansing on db
         */}
-          {data.message !== "Data is not found" && text ? (
+          {text === "" ? (
+            <p className="text-gray-400">Terjemahan</p>
+          ) : isPending ? (
+            <p className="text-gray-400">Sedang menerjemahkan...</p>
+          ) : data.message !== "Data is not found" ? (
             <>
               <p>
                 {lang.tl === "id" ? data.data[0].idkata : data.data[0].lpgkata}
-                {isPending && <span>...</span>}
+
                 {lang.tl === "lpg" && data.data[0]?.lpgdialek && (
                   <span className="font-bold">
                     (Dialek {data.data[0]?.lpgdialek ?? "-"})
@@ -135,13 +139,9 @@ const Translation = ({ data }: TranslationProps) => {
                 ""
               )}
             </>
-          ) : data.message === "Data is not found" && text ? (
-            <p>Kata tidak ditemukan{isPending && <span>...</span>}</p>
-          ) : (
-            <p className="text-gray-400">
-              Terjemahan{isPending && <span>...</span>}
-            </p>
-          )}
+          ) : data.message === "Data is not found" ? (
+            <p>Kata tidak ditemukan</p>
+          ) : null}
         </div>
 
         {/* if there's other translation data */}
