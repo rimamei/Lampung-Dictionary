@@ -30,7 +30,7 @@ const Header = () => {
             className="mr-4 object-cover"
           />
           <h1 className="font-semibold">
-            Kamus <br /> Bahasa Lampung
+            Kamus <br /> Indonesia - Lampung
           </h1>
         </div>
         <div className="flex items-center">
