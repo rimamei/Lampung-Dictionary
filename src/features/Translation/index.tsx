@@ -147,7 +147,8 @@ const Translation = ({ data }: TranslationProps) => {
         {/* if there's other translation data */}
         {data.message !== "Data is not found" &&
           text &&
-          data.data.length > 1 && (
+          data.data.length > 1 &&
+          !isPending && (
             <div className="mt-4 w-full min-w-[269px] rounded-xl border border-gray-100 bg-gray-100 p-6 shadow outline-none dark:bg-zinc-600">
               <div>
                 <div className="flex items-start justify-between">
