@@ -19,7 +19,10 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-blur sticky top-0 border-b border-gray-100 bg-white shadow dark:border-gray-900 dark:bg-zinc-700">
+    <header
+      data-testid="header"
+      className="bg-blur sticky top-0 border-b border-gray-100 bg-white shadow dark:border-gray-900 dark:bg-zinc-700"
+    >
       <div className="mx-auto flex max-w-[1280px] items-center justify-between p-4">
         <div className="flex items-center">
           <Image
@@ -36,6 +39,7 @@ const Header = () => {
         <div className="flex items-center">
           <div className="mx-6 flex rounded-full bg-gray-300 dark:bg-gray-500">
             <div
+              data-testid="light-theme"
               className={cn(
                 "cursor-pointer rounded-full p-2",
                 mounted && theme === "light" ? "bg-primary" : "",
@@ -45,6 +49,7 @@ const Header = () => {
               <FiSun />
             </div>
             <div
+              data-testid="dark-theme"
               className={cn(
                 "cursor-pointer rounded-full p-2",
                 mounted && theme === "dark" ? "bg-primary" : "",
