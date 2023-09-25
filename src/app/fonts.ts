@@ -10,7 +10,3 @@ export const poppins = Poppins({
 export const lampung_v2 = localFont({
     src: "../assets/aksara-Lampung-Unila-v2.ttf", variable: "--font-lampung",
 });
-
-export const lampung = localFont({
-    src: "../assets/aksara-Lampung-Unila.ttf", variable: "--font-lampung",
-});
