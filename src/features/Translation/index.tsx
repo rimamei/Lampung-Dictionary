@@ -2,17 +2,12 @@
 
 import { debounce } from "lodash";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useState,
-  useTransition,
-} from "react";
+import React, { ChangeEvent, useEffect, useState, useTransition } from "react";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { LiaExchangeAltSolid } from "react-icons/lia";
 
 import { lampung_v2 } from "@/app/fonts";
+import { TranslationResponseType } from "@/lib/type";
 import { convertToLampungAlphabet } from "@/utils/convertToLampungAlphabet";
 import { cn } from "@/utils/style";
 
@@ -39,14 +34,19 @@ const Translation = ({ data }: TranslationProps) => {
   });
 
   useEffect(() => {
-    if (urlLang && urlText) {
+    if (urlText) {
       setText(urlText || "");
+    }
+  }, [urlText]);
+
+  useEffect(() => {
+    if (urlLang) {
       setLang({
         og: urlLang || "id",
         tl: urlLang === "id" ? "lpg" : "id",
       });
     }
-  }, [urlText, urlLang]);
+  }, [urlLang]);
 
   let lengthOtherTrans = data?.data?.length;
 
@@ -60,16 +60,13 @@ const Translation = ({ data }: TranslationProps) => {
     });
   };
 
-  const handleTextChangeDebounce = useCallback(
-    debounce((value: string) => {
-      if (value) {
-        navigate(`/?lang=${lang.og}&text=${value}`);
-      } else {
-        navigate(`/?lang=${lang.og}`);
-      }
-    }, 700),
-    [],
-  );
+  const handleTextChangeDebounce = debounce((value: string) => {
+    if (value) {
+      navigate(`/?lang=${lang.og}&text=${value}`);
+    } else {
+      navigate(`/?lang=${lang.og}`);
+    }
+  });
 
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
@@ -90,17 +87,22 @@ const Translation = ({ data }: TranslationProps) => {
   };
 
   return (
-    <div className="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:items-start md:space-x-4 md:space-y-0">
+    <div
+      data-testid="translation"
+      className="flex w-full flex-col items-center justify-center space-y-4 md:flex-row md:items-start md:space-x-4 md:space-y-0"
+    >
       <div className="w-full md:w-1/2">
         <SearchInput
           lang={lang.og}
           placeholder="Masukkan text..."
           onChange={handleTextChange}
           value={text}
+          data-testid="input"
         />
       </div>
       <div
         onClick={handleLangChange}
+        data-testid="language-change"
         className="h-fit w-fit cursor-pointer rounded-full bg-primary p-2 hover:bg-orange-300 dark:border-gray-100 dark:bg-zinc-500 dark:shadow-2xl"
       >
         <LiaExchangeAltSolid
@@ -109,20 +111,22 @@ const Translation = ({ data }: TranslationProps) => {
         />
       </div>
       <div className="w-full md:w-1/2">
-        <h1 className="mb-2 w-full rounded-full border-primary bg-primary p-2 text-center text-white dark:border-gray-100 dark:bg-zinc-500 dark:shadow-2xl">
+        <h1
+          data-testid="lang-output"
+          className="mb-2 w-full rounded-full border-primary bg-primary p-2 text-center text-white dark:border-gray-100 dark:bg-zinc-500 dark:shadow-2xl"
+        >
           {lang.tl === "id" ? "Indonesia" : "Lampung"}
         </h1>
         <div className="min-h-[150px] w-full min-w-[269px] rounded-xl border border-gray-100 bg-gray-100 p-6 shadow outline-none dark:bg-zinc-600">
-          {/* mapping translation data 
-            Check text because there's no data cleansing on db
-        */}
           {text === "" ? (
-            <p className="text-gray-400">Terjemahan</p>
+            <p className="text-gray-400" data-testid="default">
+              Terjemahan
+            </p>
           ) : isPending ? (
             <p className="text-gray-400">Sedang menerjemahkan...</p>
           ) : data.message !== "Data is not found" ? (
             <>
-              <p>
+              <p data-testid="translation-word">
                 {lang.tl === "id" ? data.data[0].idkata : data.data[0].lpgkata}
 
                 {lang.tl === "lpg" && data.data[0]?.lpgdialek && (
@@ -140,7 +144,7 @@ const Translation = ({ data }: TranslationProps) => {
               )}
             </>
           ) : data.message === "Data is not found" ? (
-            <p>Kata tidak ditemukan</p>
+            <p data-testid="not-found">Kata tidak ditemukan</p>
           ) : null}
         </div>
 
