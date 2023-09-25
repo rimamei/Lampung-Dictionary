@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import prisma from '@/lib/prisma'
+import { TranslationType } from '@/lib/type'
 
 
 // GET /api/translations

@@ -1,4 +1,4 @@
-type TranslationType = {
+export type TranslationType = {
     "id": string;
     "idkata": string | null;
     "lpgkata": string | null;
@@ -6,12 +6,12 @@ type TranslationType = {
     "lpgdialek": string | null;
 }
 
-type ParamsType = {
+export type ParamsType = {
     text: string;
     lang: "id" | "lpg";
 };
 
-type TranslationResponseType = {
+export type TranslationResponseType = {
     message: string;
     data: TranslationType[];
 };

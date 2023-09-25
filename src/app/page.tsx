@@ -2,29 +2,15 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 
 import Translation from "@/features/Translation";
+import { ParamsType } from "@/lib/type";
+import { fetchSearchData } from "@/service";
 
-const fetchSearchData = async ({ text, lang }: ParamsType) => {
-  let q = "";
-  if (text) {
-    q = text.toLowerCase();
-  }
+type TranslationPageProps = { searchParams: ParamsType };
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API}/api/translations?text=${q}&lang=${
-      lang ?? "id"
-    }`,
-    { cache: "no-store" },
-  );
+const TranslationPage = async (props: TranslationPageProps) => {
+  const lang = props?.searchParams?.lang;
+  const text = props?.searchParams?.text;
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-};
-
-const TranslationPage = async ({ searchParams }: any) => {
-  const { lang, text } = searchParams;
   const data = await fetchSearchData({ text, lang });
 
   return (
