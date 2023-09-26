@@ -42,7 +42,7 @@ const Header = () => {
               data-testid="light-theme"
               className={cn(
                 "cursor-pointer rounded-full p-2",
-                mounted && theme === "light" ? "bg-primary" : "",
+                (mounted && theme === "light") || "system" ? "bg-primary" : "",
               )}
               onClick={() => setTheme("light")}
             >
