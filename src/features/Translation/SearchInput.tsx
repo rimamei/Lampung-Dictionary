@@ -4,7 +4,6 @@ import React from "react";
 
 type SearchInputProps = React.HTMLAttributes<HTMLTextAreaElement> & {
   lang: string;
-  value: string;
   disabled?: boolean;
 };
 
@@ -12,7 +11,6 @@ const SearchInput = ({
   lang,
   placeholder,
   disabled,
-  value,
   ...rest
 }: SearchInputProps) => {
   return (
@@ -24,7 +22,6 @@ const SearchInput = ({
         placeholder={placeholder}
         className="min-h-[150px] w-full min-w-[269px] rounded-xl border border-gray-100 p-6 shadow outline-none dark:bg-zinc-600"
         disabled={disabled}
-        value={value}
         {...rest}
       ></textarea>
     </div>

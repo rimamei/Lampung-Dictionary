@@ -60,28 +60,24 @@ const Translation = ({ data }: TranslationProps) => {
     });
   };
 
-  const handleTextChangeDebounce = debounce((value: string) => {
-    if (value) {
-      navigate(`/?lang=${lang.og}&text=${value}`);
-    } else {
-      navigate(`/?lang=${lang.og}`);
-    }
-  });
-
-  const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleTextChange = debounce((e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
 
     setText(value);
     setIsExpand(false);
-    handleTextChangeDebounce(value);
-  };
+
+    navigate(`/?lang=${lang.og}&text=${value}`);
+  }, 500);
 
   const handleLangChange = () => {
-    router.push(`/?lang=${lang.og === "id" ? "lpg" : "id"}`);
-    setLang({
+    const value = {
       og: lang.og === "id" ? "lpg" : "id",
       tl: lang.tl === "id" ? "lpg" : "id",
-    });
+    };
+
+    router.push(`/?lang=${value.og}`);
+
+    setLang(value);
     setText("");
     setIsExpand(false);
   };
@@ -96,7 +92,7 @@ const Translation = ({ data }: TranslationProps) => {
           lang={lang.og}
           placeholder="Masukkan text..."
           onChange={handleTextChange}
-          value={text}
+          defaultValue={text}
           data-testid="input"
         />
       </div>
